@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-stable
+  labels:
+    app: my-web-app
+    tier: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-web-app
+      version: stable
+  template:
+    metadata:
+      labels:
+        app: my-web-app
+        version: stable
+    spec:
+      containers:
+      - name: web-app-container
+        image: IMAGE_PLACEHOLDER
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-stable-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: my-web-app
+    version: stable
