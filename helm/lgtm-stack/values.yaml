@@ -4,8 +4,9 @@ global:
   # If empty or null, the Kubernetes cluster's default StorageClass is used.
   storageClass: ""
 
-# Grafana Visualization configuration
+# Grafana Visualization dashboard configuration
 grafana:
+  enabled: true
   replicaCount: 1
   image:
     repository: "grafana/grafana"
@@ -16,8 +17,9 @@ grafana:
     port: 80
     targetPort: 3000
 
-# Grafana Alloy Telemetry Agent configuration
+# Grafana Alloy OpenTelemetry Collector / Telemetry Agent configuration
 alloy:
+  enabled: true
   replicaCount: 1
   image:
     repository: "grafana/alloy"
@@ -29,6 +31,7 @@ alloy:
 
 # Loki logs database configuration
 loki:
+  enabled: true
   image:
     repository: "grafana/loki"
     tag: "2.9.8"
@@ -39,6 +42,7 @@ loki:
 
 # Mimir metrics database configuration
 mimir:
+  enabled: true
   image:
     repository: "grafana/mimir"
     tag: "2.12.0"
@@ -49,6 +53,7 @@ mimir:
 
 # Tempo traces database configuration
 tempo:
+  enabled: true
   image:
     repository: "grafana/tempo"
     tag: "2.4.1"
@@ -56,3 +61,27 @@ tempo:
   persistence:
     enabled: true
     size: "10Gi"
+
+# Sample Node.js Microservice with OpenTelemetry instrumentation
+nodeApp:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: "internal/node-app"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+  service:
+    type: "ClusterIP"
+    port: 8080
+
+# Sample Python Microservice with OpenTelemetry instrumentation
+pythonApp:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: "internal/python-app"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+  service:
+    type: "ClusterIP"
+    port: 5000

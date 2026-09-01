@@ -1,3 +1,4 @@
+{{- if .Values.pythonApp.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -73,3 +74,4 @@ spec:
   selector:
     app: python-app
     {{- include "lgtm-stack.selectorLabels" . | nindent 4 }}
+{{- end }}

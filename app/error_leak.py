@@ -1,14 +1,9 @@
-# pyrefly: ignore [missing-import]
 from fastapi import FastAPI, Response, status
-# pyrefly: ignore [missing-import]
-from fastapi.responses import RedirectResponse, JSONResponse
-# pyrefly: ignore [missing-import]
-import uvicorn
+from prometheus_fastapi_instrumentator import Instrumentator
+# import uvicorn
 
 app = FastAPI(title="DevOps College Project API")
 
-# pyrefly: ignore [missing-import]
-from prometheus_fastapi_instrumentator import Instrumentator
 
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 

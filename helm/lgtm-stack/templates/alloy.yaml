@@ -1,3 +1,4 @@
+{{- if .Values.alloy.enabled }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -221,3 +222,4 @@ spec:
         - name: config
           configMap:
             name: alloy-config
+{{- end }}

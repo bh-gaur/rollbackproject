@@ -1,3 +1,4 @@
+{{- if .Values.tempo.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -123,3 +124,4 @@ spec:
           requests:
             storage: {{ .Values.tempo.persistence.size | quote }}
   {{- end }}
+{{- end }}
